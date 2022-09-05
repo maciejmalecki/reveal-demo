@@ -1,0 +1,17 @@
+.reveal .slides .cyan {
+    color: #00ffff;
+}
+.reveal .slides .pink {
+    color: #ff00ff;
+}
+.reveal .slides .flex {
+    display: flex;
+}
+.reveal .slides .gap-l {
+    gap: 2em;
+}
+.reveal .slides .whiteboard {
+    background-color: white;
+    padding: 1em;
+    border-radius: 1em;
+}
