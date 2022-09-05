@@ -130,7 +130,17 @@
 							rts
 						}
 						```
-					</script>
+						---
+						## do some math
+
+						`$$
+						\begin{aligned}
+							\dot{x} & = \sigma(y-x) \\
+							\dot{y} & = \rho x - y - xz \\
+							\dot{z} & = -\beta z + xy
+						\end{aligned}
+						$$`
+				</script>
 				</section>
 			</div>
 		</div>
@@ -139,6 +149,8 @@
 		<script src="plugin/notes/notes.js"></script>
 		<script src="plugin/markdown/markdown.js"></script>
 		<script src="plugin/highlight/highlight.js"></script>
+		<script src="plugin/math/math.js"></script>
+		<script src="plugin/zoom/zoom.js"></script>
 		<script>
 			// More info about initialization & config:
 			// - https://revealjs.com/initialization/
@@ -147,7 +159,7 @@
 				hash: true,
 				slideNumber: 'c/t',
 				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealZoom ]
 			});
 		</script>
 	</body>
