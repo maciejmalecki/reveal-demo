@@ -4,9 +4,6 @@
 .reveal .slides .pink {
     color: #ff00ff;
 }
-.reveal .slides .flex {
-    display: flex;
-}
 .reveal .slides .gap-l {
     gap: 2em;
 }

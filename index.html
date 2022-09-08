@@ -23,20 +23,30 @@
 					<p class="pink">Maciej Małecki</p>
 				</section>
 				<section>
+					<img src="img/spy.png" alt="spy" class="r-stretch">
+				</section>
+				<section>
 					<p class="r-fit-text">REALLY?!</p>
 				</section>
 				<section>
-					<h3>Here we go vertical</h3>
 					<section>
-						<h4>First vertical</h4>
-						<p>Lorem ipsum...</p>
+						<h3>Here we go vertical</h3>
 					</section>
 					<section>
-						<h4>Second vertical</h4>
+						<h4>What is the problem?</h4>
+						<p class="r-fit-text fragment">WYSIWYG</p>
+					</section>
+					<section>
+						<h4>Since when?</h4>
+						<img src="img/mac.png" alt="mac" class="fragment">
+					</section>
+					<section>
+						<h4>Who's to blame?</h4>
+						<img src="img/jobs.jpg" alt="steve" class="fragment">
 					</section>
 				</section>
 				<section>
-					<div class="r-hstack flex gap-l">
+					<div class="r-hstack gap-l">
 						<img src="img/hello.excalidraw.png" alt="Hello!">
 						<div>
 							<ul>
@@ -90,7 +100,7 @@
 						## Tępe ch...<!-- .element: class="cyan"-->
 						---
 						### and finally
-						<div class="flex gap-l">
+						<div class="r-hstack gap-l">
 							<img src="img/bomba.png" alt="Tytus">
 							<div>
 								<ul>
@@ -110,36 +120,45 @@
 						```
 						---
 						### source with animations
-						```asm[|2|5-7|9|12-15|17]
-						checkCollision: {
-							lda $D01F
-							and #%00000001
-							beq !+
-								lda gameState
-								ora #%00000001
-								sta gameState
-						!:
-							lda $D01E
-							and #%00011110
-							beq !+
-								eor $D015
-								and #%00011111
-								ora #%00000001
-								sta $D015
-						!:
-							rts
-						}
+						```kotlin[|2-5|6-8|10|11|12|13-14]
+						private fun getProcessor(inputByteStream: InputByteStream): CTMProcessor {
+							val id = inputByteStream
+										.read(3)
+										.map { it.toChar() }
+										.joinToString(separator = "")
+							if (id != "CTM") {
+							  throw InvalidCTMFormatException("CTM id is missing")
+							}
+							return when (val version = inputByteStream.readByte().toInt()) {
+							  5 -> CTM5Processor(this@CharpadProcessor)
+							  6 -> CTM6Processor(this@CharpadProcessor)
+							  7 -> CTM7Processor(this@CharpadProcessor)
+							  8, 82 ->
+							  	CTM8Processor(this@CharpadProcessor, version, ctm8PrototypeCompatibility)
+							  else -> throw InvalidCTMFormatException("Unsupported version: $version")
+							}
+						  }
 						```
 						---
 						## do some math
 
 						`$$
-						\begin{aligned}
-							\dot{x} & = \sigma(y-x) \\
-							\dot{y} & = \rho x - y - xz \\
-							\dot{z} & = -\beta z + xy
-						\end{aligned}
+					  	2\int_{-r}^r\sqrt{r^2-x^2}dx = \pi r^2
 						$$`
+						--
+						<div class="r-hstack gap-l">
+							<img src="img/disc.excalidraw.svg" alt="Disc">
+							<div>
+								\[ 2\int_{-r}^r\sqrt{r^2-x^2}dx = \pi r^2 \]
+							</div>
+						</div>
+						---
+						## PDF Generierung
+
+						```bash
+						npm i -g decktape
+						decktape reveal https://maciejmalecki.github.io/reveal-demo reveal-demo.pdf
+						```
 				</script>
 				</section>
 			</div>
@@ -156,6 +175,7 @@
 			// - https://revealjs.com/initialization/
 			// - https://revealjs.com/config/
 			Reveal.initialize({
+				width: 1200,
 				hash: true,
 				slideNumber: 'c/t',
 				// Learn about plugins: https://revealjs.com/plugins/
